@@ -1,0 +1,43 @@
+﻿@model CriandoAplicacaoAspNetCore.Model.Dtos.LoginDto
+@{
+    Layout = "_LayoutLogin";
+    ViewBag.Title = "Painel Administrativo v1.0";
+
+    var tempData = TempData["ErroAutenticacao"];
+    var erroAutenticacao = tempData != null ? tempData.ToString() : string.Empty;
+}
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="login-panel panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Autenticar - @ViewBag.Title </h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Login", "Secure", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, true, new { @class = "col-xs-12", role = "form" }))
+                {
+
+                    @Html.AntiForgeryToken()
+
+                    <fieldset>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.Usuario, new { @class = "form-control", placeholder = "Usuário" })
+                            @Html.ValidationMessageFor(model => model.Usuario, string.Empty, htmlAttributes: new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.PasswordFor(model => model.Senha, new { @class = "form-control", placeholder = "Senha" })
+                            @Html.ValidationMessageFor(model => model.Senha, string.Empty, htmlAttributes: new { @class = "text-danger" })
+                        </div>
+                        @if (!string.IsNullOrEmpty(erroAutenticacao))
+	                    {
+		                    <text>
+                            <span class="text-danger">@erroAutenticacao</span>
+                            </text>
+	                    }
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
+                    </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+</div>
