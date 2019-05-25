@@ -21,6 +21,11 @@ namespace CriandoAplicacaoAspNetCore.WebApp.Areas.Painel.Controllers
             this._usuarioBusiness = usuarioBusiness;
         }
 
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public IActionResult Login()
         {

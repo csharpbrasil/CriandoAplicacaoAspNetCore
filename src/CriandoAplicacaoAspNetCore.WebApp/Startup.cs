@@ -29,7 +29,7 @@ namespace CriandoAplicacaoAspNetCore.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -38,22 +38,24 @@ namespace CriandoAplicacaoAspNetCore.WebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-			        .AddCookie(options => {
-						options.ExpireTimeSpan = TimeSpan.FromHours(1);
-						options.LoginPath = new PathString("/Painel/Secure/Login");
-			        });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(options => {
+                        options.ExpireTimeSpan = TimeSpan.FromHours(1);
+                        options.LoginPath = new PathString("/Painel/Secure/Login");
+                    });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                    .AddRazorPagesOptions(options => options.AllowAreas = true)
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
+            services.AddDbContext<ApplicationContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
 
-			services.AddDbContext<ApplicationContext>(options =>
-			{
-				options.UseSqlServer(connectionString);
-			});
-
-			services.AddScoped<IUnitOfWork, UnitOfWork>();
-			services.AddScoped<IUsuarioBusiness, UsuarioBusiness>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUsuarioBusiness, UsuarioBusiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,18 +70,18 @@ namespace CriandoAplicacaoAspNetCore.WebApp
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-			app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
-			{
+            {
                 routes.MapRoute(
                     name: "area",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-				
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
