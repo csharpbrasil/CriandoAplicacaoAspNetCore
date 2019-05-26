@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CriandoAplicacaoAspNetCore.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CriandoAplicacaoAspNetCore.Model", "CriandoAplicacaoAspNetCore.Model\CriandoAplicacaoAspNetCore.Model.csproj", "{FA1A0155-9BF5-471C-A7C7-288B086AD208}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriandoAplicacaoAspNetCore.WebApp", "CriandoAplicacaoAspNetCore.WebApp\CriandoAplicacaoAspNetCore.WebApp.csproj", "{7B9D2AB5-C186-471C-B260-797BB01D03E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CriandoAplicacaoAspNetCore.WebApp", "CriandoAplicacaoAspNetCore.WebApp\CriandoAplicacaoAspNetCore.WebApp.csproj", "{7B9D2AB5-C186-471C-B260-797BB01D03E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriandoAplicacaoAspNetCore.Tests", "CriandoAplicacaoAspNetCore.Tests\CriandoAplicacaoAspNetCore.Tests.csproj", "{49A222D2-EF22-42F6-96F8-A681B0759EA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriandoAplicacaoAspNetCore.Utils", "CriandoAplicacaoAspNetCore.Utils\CriandoAplicacaoAspNetCore.Utils.csproj", "{EFE8980B-14EB-4D17-860F-9C89CAD269AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,30 @@ Global
 		{7B9D2AB5-C186-471C-B260-797BB01D03E1}.Release|x64.Build.0 = Release|Any CPU
 		{7B9D2AB5-C186-471C-B260-797BB01D03E1}.Release|x86.ActiveCfg = Release|Any CPU
 		{7B9D2AB5-C186-471C-B260-797BB01D03E1}.Release|x86.Build.0 = Release|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Debug|x64.Build.0 = Debug|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Debug|x86.Build.0 = Debug|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Release|x64.ActiveCfg = Release|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Release|x64.Build.0 = Release|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Release|x86.ActiveCfg = Release|Any CPU
+		{49A222D2-EF22-42F6-96F8-A681B0759EA5}.Release|x86.Build.0 = Release|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Debug|x64.Build.0 = Debug|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Debug|x86.Build.0 = Debug|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Release|x64.ActiveCfg = Release|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Release|x64.Build.0 = Release|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Release|x86.ActiveCfg = Release|Any CPU
+		{EFE8980B-14EB-4D17-860F-9C89CAD269AD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

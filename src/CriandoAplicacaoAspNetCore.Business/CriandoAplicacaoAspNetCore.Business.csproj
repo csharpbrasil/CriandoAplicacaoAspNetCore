@@ -6,5 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CriandoAplicacaoAspNetCore.Model\CriandoAplicacaoAspNetCore.Model.csproj" />
+    <ProjectReference Include="..\CriandoAplicacaoAspNetCore.Utils\CriandoAplicacaoAspNetCore.Utils.csproj" />
   </ItemGroup>
 </Project>

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using CriandoAplicacaoAspNetCore.Model.Dtos;
-using CriandoAplicacaoAspNetCore.Model.Entities;
+﻿using CriandoAplicacaoAspNetCore.Model.Dtos;
 using CriandoAplicacaoAspNetCore.Model.Interfaces;
+using CriandoAplicacaoAspNetCore.Utils;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CriandoAplicacaoAspNetCore.Business
 {
@@ -18,19 +17,36 @@ namespace CriandoAplicacaoAspNetCore.Business
 
         public virtual UsuarioDto Autenticar(LoginDto loginDto)
         {
-            Expression<Func<Usuario, bool>> expression = q => q.Login.ToLower().Equals(loginDto.Usuario) && q.Senha.Equals(loginDto.Senha);
-            var usuarioDto = this._unitOfWork.UsuarioRepository
-                                             .Get(expression)
-                                             .Select(s => new UsuarioDto
-                                             {
-                                                 IdUsuario = s.IdUsuario,
-                                                 Nome = s.Nome,
-                                                 Email = s.Email,
-                                                 Login = s.Login
-                                             })
-                                             .FirstOrDefault();
+            var usuario = this._unitOfWork
+                .UsuarioRepository
+                .Get(q => q.Login.ToLower().Equals(loginDto.Usuario))
+                .FirstOrDefault();
 
-            return usuarioDto;
+            if (!SecurityManager.Validate(loginDto.Senha, usuario.Salt, usuario.Hash))
+                return null;
+
+            return new UsuarioDto
+            {
+                IdUsuario = usuario.IdUsuario,
+                Nome = usuario.Nome,
+                Email = usuario.Email,
+                Login = usuario.Login
+            };
+        }
+
+        public IEnumerable<UsuarioDto> Filtrar()
+        {
+            var query = this._unitOfWork
+                .UsuarioRepository
+                .Get(null, o => o.OrderBy(u => u.Nome))
+                .Select(s => new UsuarioDto
+                {
+                    IdUsuario = s.IdUsuario,
+                    Nome = s.Nome,
+                    Email = s.Email,
+                    Login = s.Login
+                });
+            return query.ToList();
         }
     }
 }

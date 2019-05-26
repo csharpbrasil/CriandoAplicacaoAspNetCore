@@ -8,5 +8,6 @@ namespace CriandoAplicacaoAspNetCore.Model.Interfaces
     public interface IUsuarioBusiness
     {
         UsuarioDto Autenticar(LoginDto loginDto);
+        IEnumerable<UsuarioDto> Filtrar();
     }
 }
