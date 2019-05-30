@@ -1,0 +1,55 @@
+﻿@model CriandoAplicacaoAspNetCore.Model.Dtos.UsuarioDto
+@section Scripts
+    {
+    <script src="~/js/Usuario/SalvarUsuario.js" asp-append-version="true"></script>
+}
+
+<div class="row">
+    <div class="col">
+        <h2 class="display-4">@ViewData["Title"]</h2>
+    </div>
+</div>
+
+<div class="row mt-4 mb-4">
+    <div class="col">
+        <a class="btn btn-primary" asp-area="Painel" asp-controller="Usuario" asp-action="Consultar"><i class="fas fa-arrow-circle-left"></i> Voltar</a>
+        <a id="btn-salvar" class="btn btn-primary" asp-area="Painel" asp-controller="Usuario" asp-action="Salvar"><i class="fas fa-plus-circle"></i> Salvar</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <form id="frm-usuario">
+            @Html.HiddenFor(model => model.IdUsuario)
+            <div class="form-group row">
+                <label asp-for="Nome" class="col-sm-2 col-form-label">Nome</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", placeholder = "Nome completo" })
+                    @Html.ValidationMessageFor(model => model.Nome)
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Login" class="col-sm-2 col-form-label">Login</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Login, new { @class = "form-control", placeholder = "Login" })
+                    @Html.ValidationMessageFor(model => model.Nome)
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "E-mail", @type = "Email" })
+                </div>
+            </div>
+            @if (Model.IdUsuario == 0)
+            {
+                <div class="form-group row">
+                    <label asp-for="Senha" class="col-sm-2 col-form-label">Senha</label>
+                    <div class="col-sm-10">
+                        @Html.PasswordFor(model => model.Senha, new { @class = "form-control", placeholder = "Senha" })
+                    </div>
+                </div>
+            }
+        </form>
+    </div>
+</div>

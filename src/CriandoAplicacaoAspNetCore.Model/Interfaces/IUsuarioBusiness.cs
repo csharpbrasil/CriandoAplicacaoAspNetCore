@@ -9,5 +9,8 @@ namespace CriandoAplicacaoAspNetCore.Model.Interfaces
     {
         UsuarioDto Autenticar(LoginDto loginDto);
         IEnumerable<UsuarioDto> Filtrar();
+        UsuarioDto Selecionar(int id);
+        ResultadoDto Excluir(int id);
+        ResultadoDto Salvar(UsuarioDto usuario);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CriandoAplicacaoAspNetCore.Model.Dtos;
+using CriandoAplicacaoAspNetCore.Model.Entities;
 using CriandoAplicacaoAspNetCore.Model.Interfaces;
 using CriandoAplicacaoAspNetCore.Utils;
 using System.Collections.Generic;
@@ -47,6 +48,67 @@ namespace CriandoAplicacaoAspNetCore.Business
                     Login = s.Login
                 });
             return query.ToList();
+        }
+
+        public UsuarioDto Selecionar(int id)
+        {
+            var usuario = this._unitOfWork
+                .UsuarioRepository
+                .GetById(id);
+
+            return new UsuarioDto
+            {
+                IdUsuario = usuario.IdUsuario,
+                Nome = usuario.Nome,
+                Email = usuario.Email,
+                Login = usuario.Login
+            };
+        }
+
+        public ResultadoDto Excluir(int id)
+        {
+            this._unitOfWork.UsuarioRepository.Delete(id);
+            var sucesso = this._unitOfWork.SaveChanges();
+            return new ResultadoDto
+            {
+                Sucesso = sucesso
+            };
+        }
+
+        public ResultadoDto Salvar(UsuarioDto usuarioDto)
+        {
+            var usuario = new Usuario();
+
+            if (usuarioDto.IdUsuario > 0)
+            {
+                usuario = this._unitOfWork.UsuarioRepository.GetById(usuarioDto.IdUsuario);
+                usuario.Nome = usuarioDto.Nome;
+                usuario.Email = usuarioDto.Email;
+
+                this._unitOfWork.UsuarioRepository.Update(usuario);
+            }
+            else
+            {                
+                var salt = SecurityManager.CreateSalt();
+                var hash = SecurityManager.CreateHash(usuarioDto.Senha, salt);
+
+                usuario = new Usuario();
+                usuario.Nome = usuarioDto.Nome;
+                usuario.Email = usuarioDto.Email;
+                usuario.Login = usuarioDto.Login;
+                usuario.Hash = hash;
+                usuario.Salt = salt;
+                this._unitOfWork.UsuarioRepository.Add(usuario);
+            }
+
+            var sucesso = this._unitOfWork.SaveChanges();
+            var resultado = new ResultadoDto
+            {
+                Sucesso = sucesso,
+                Id = usuario.IdUsuario
+            };
+            
+            return resultado;
         }
     }
 }
